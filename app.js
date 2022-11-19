@@ -1,7 +1,8 @@
 const express = require("express")
 const app = express()
-
-app.listen(3000)
+require("dotenv").config()
+const port = process.env.PORT || 3000
+app.listen(port)
 
 app.get("/", function(req, res) {
     res.sendFile(__dirname + "/views/index.html")

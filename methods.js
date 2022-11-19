@@ -3,9 +3,10 @@ const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
 require("dotenv").config()
+const port = process.env.PORT
 
 app.use(express.json())
-app.listen(3000)
+app.listen(port)
 
 let users = [
     {
