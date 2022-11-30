@@ -1,23 +1,33 @@
-const express = require("express")
-const app = express()
-require("dotenv").config()
-const port = process.env.PORT || 3000
-app.listen(port)
+// const { json } = require("express")
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+require("dotenv").config();
+const port = process.env.PORT;
+const emailValidator = require("email-validator");
+const cookieParser = require("cookie-parser")
 
-app.get("/", function(req, res) {
-    res.sendFile(__dirname + "/views/index.html")
-})
+app.use(express.json());
+app.listen(port);
+app.use(cookieParser())
 
-app.get("/about", function(req, res) {
-    res.sendFile(__dirname + "/views/about.html")
-})
+const userRouter = require("./Routers/userRouter")
+const authRouter = require("./Routers/authRouter")
 
-app.get("/about-me", function(req, res) {
-    res.redirect("/about")
-})
+app.use("/user", userRouter);
+app.use("/auth", authRouter);
 
-app.use((req, res) => {
-    console.log("backend", log)
-    res.status(404)
-    res.sendFile(__dirname + "/views/404.html")
-})
+let users = [
+  {
+    id: 1,
+    name: "Himanshu",
+  },
+  {
+    id: 2,
+    name: "Ankush",
+  },
+  {
+    id: 3,
+    name: "Deepak",
+  },
+];
